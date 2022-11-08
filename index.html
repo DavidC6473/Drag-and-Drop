@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CS6115 Assignment</title>
+    <link rel="stylesheet" href="./style.css">
+  <script type = 'text/javascript'>
+
+    let icon, target = null;
+
+    window.addEventListener('DOMContentLoaded', setupEvents);
+
+    function setupEvents() {
+    if(window.File && window.FileList && window.FileReader){
+      target = document.getElementById('dropArea');
+      target.addEventListener('dragenter', dragEnter);
+      target.addEventListener('dragleave', dragLeave);
+      target.addEventListener('dragover', dragOver);
+      target.addEventListener('drop', dropFile);
+      }
+
+    else alert('This file is not supported');
+}
+
+    function dragEnter(evt) {
+
+      target.style.backgroundColor = 'blue';
+    }
+
+    function dragLeave(evt) {
+      target.style.backgroundColor = '#b53836'
+    }
+
+    function dragOver(evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
+      target.style.backgroundColor = '#8e2c2a';
+    }
+
+    function dropFile(evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
+      let file = evt.dataTransfer.files[0];
+      document.getElementById('textArea1').value = file.name + "\n" + file.size + " bytes\n" + file.type;
+      document.getElementById("dropArea").innerHTML = "File Successfully Imported";
+    }
+
+  </script>
+  </head>
+  <body>
+    <ol>
+      <li><a href="https://www.cloudconvert.com/" target="_blank"><img src="logo.png"></a></li>
+      <li><a>Tools</a></li>
+      <li><a>API</a></li>
+      <li><a>Pricing</a></li>
+      <li><a>Sign Up</a></li>
+      <li><a>Login</a></li>
+    </ol>
+    <div id='dropArea'>
+      <div>Drop File Here</div>
+    </div>
+    <textarea id='textArea1'></textarea>
+  </body>
+</html>
